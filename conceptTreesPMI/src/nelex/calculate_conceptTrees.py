@@ -89,9 +89,6 @@ def compute_dm(data):
         for j in xrange(len(sounds)):
             lodict[sounds[i],sounds[j]] = logOdds[i,j]
 
-    
-    #test_words = []
-    #test_concepts = []
 
     concept_dict = defaultdict(lambda: defaultdict(int))
     #reads the data file
@@ -104,13 +101,11 @@ def compute_dm(data):
 
     out = data.split(".")
     out = out[0].split("/")[-1]
-    #print out
     write_cognates(out, cogid_dict)
     
     
     #for each concept in the dictionary
     for concept,langs in te.items():
-        #print concept, langs
         dist_dict = defaultdict(lambda: defaultdict(float))
         langs_list = []
         #for each language in the dictionary, append it to a list
@@ -122,27 +117,20 @@ def compute_dm(data):
         #append the language pair to a list
         #append the language pair and their corresponding words to a list
         for lang_pair in it.combinations(langs_list,r=2):
-            #print lang_pair
             l1, l2 = lang_pair
             #lang_pair_list.append((l1, l2))
             #directly computing pmi distance here
-            #print langs[l1], langs[l2]
             ##transform similarity value into distance value
             wrd_score = 1.0-((2.0*nw(langs[l1],langs[l2]))/(nw(langs[l1],langs[l1])+nw(langs[l2],langs[l2])))
-            #print "nw",nw(langs[l1],langs[l2])
-            #print "distance", wrd_score
             ##sigmoid function zur Berechnung der Distanz
             ##Vorteil Sigmoid ist eine S-Kurve. Alle Werte unter 0.5 signalisieren eine negative Aehnlichkeit (-> nicht aehnlich), all Werte ueber 0.5 
             ## signalisieren eine positive Aehnlichkeit (-> aehnlich). Dadurch kann der threshold fuer andere funktionen (lingpy) immer 0.5 sein.
             #wrd_score = 1.0 - (1.0/(1 + exp(-nw(langs[l1],langs[l2]))))
             #wrd_score2 = 1.0 - (1.0/1 + exp(-wrd_score))
-            #print "sigmoid",wrd_score
-            #print "sigmoid distance",wrd_score2
+
             dist_dict[l1][l2] = wrd_score   
             dist_dict[l2][l1]=wrd_score 
-        #for k,v in dist_dict.items():
-        #    print k,v
-#         
+      
         fout1 = codecs.open("output/nelex/phylip/"+out+"_"+concept+".phy","wb","utf-8")
         writePhy(dist_dict, fout1)
         print "still creating matrices"

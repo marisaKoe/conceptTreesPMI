@@ -14,7 +14,7 @@ def read_nelexPMI(data):
     
     #initialize a default dict with the data
     d = defaultdict(dict)
-    ##cogante dicht
+    ##cogante dict
     cogid_dict = defaultdict(dict)
     
     data.readline()
@@ -29,7 +29,6 @@ def read_nelexPMI(data):
         cc = arr[-1]
         
         if " " in concept:
-            #print concept
             concept = concept.replace(" ","")
         
         #word transcription

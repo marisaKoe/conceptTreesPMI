@@ -52,7 +52,6 @@ def compute_dm(data, method):
     sounds = array([x.strip() for x in f.readlines()])
     f.close()
     
-
     #reads the log odds scores for the whole word languages
     f = open('input/pmi_matrix_nelex.txt','r')
     l = f.readlines()
@@ -78,10 +77,7 @@ def compute_dm(data, method):
     
     ############take synonyms into account by taking the wordpair with the smallest distance
     #for each concept in the dictionary
-    for concept,langs_dict in te.items():
-        #print concept, langs_dict
-        #if concept == "Berg::N":
-            
+    for concept,langs_dict in te.items():           
                     
         dist_dict = defaultdict(lambda: defaultdict(float))
         langs_list = []
@@ -94,7 +90,6 @@ def compute_dm(data, method):
         #append the language pair to a list
         #append the language pair and their corresponding words to a list
         for lang_pair in it.combinations(langs_list,r=2):
-            #print lang_pair
             l1, l2 = lang_pair
             word_list1 = langs_dict[l1]
             word_list2=langs_dict[l2]

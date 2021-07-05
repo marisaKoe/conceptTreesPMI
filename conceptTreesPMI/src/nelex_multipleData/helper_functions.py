@@ -29,7 +29,6 @@ def read_nelexPMI(data):
         cc = arr[-1]
         
         if " " in concept:
-            #print concept
             concept = concept.replace(" ","")
         
         #word transcription
@@ -49,7 +48,7 @@ def read_nelexPMI(data):
         if "K" in asjp_word:
             print line
             
-#         ##check if the language in not in the dictionary yet, create the entry wiht a list of the first asjp_word
+#         ##check if the language in not in the dictionary yet, create the entry with a list of the first asjp_word
 #         if not lang in d[concept]:
 #             d[concept][lang] = [asjp_word]
 #         ##if the language is already in the dictionary, append the list of asjp words

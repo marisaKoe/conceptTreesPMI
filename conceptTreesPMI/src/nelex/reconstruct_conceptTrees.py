@@ -22,12 +22,9 @@ def reconstruct_trees_phy():
     Reconstructs Neighbor Joining trees for each concept
     The trees are reconstructed using R and the packages ape and phangorn
     '''
-    #print "in reconstruct trees"
     list_matrices = glob.glob("output/nelex/phylip/*.phy")
-    #print list_matrices
     for f in list_matrices:
         out = f.split(".")
-        #print out
         out = out[0].split("/")
         out = out[-1]
         t = utils.read_table(f, skip=1, row_names=1)
